@@ -3,19 +3,36 @@
 namespace Github\Api;
 
 use Github\Client;
-use Github\Mediator\ResponseMediator;
 
 /**
  * Abstract class for Api classes.
  *
  * @author Janos Vajda <vajdajanos@gmail.com>
  *
- * @todo Only GET method has been implemented, because this is just for a test so PUT, DELETE, PATCH, HEAD should be added too.
+ * @todo Only GET, POST method has been implemented,
+ * because this is just for a test so PUT, DELETE,
+ * PATCH, HEAD should be added too.
  */
 abstract class AbstractApi implements ApiInterface
 {
 
     private $url = "https://api.github.com";
+
+    /**
+     * The client.
+     *
+     * @var Client
+     */
+    protected $client;
+
+
+    /**
+     * @param Client $client
+     */
+    public function __construct(Client $client)
+    {
+        $this->client = $client;
+    }
 
     /**
      * @param null|int $page
@@ -34,8 +51,6 @@ abstract class AbstractApi implements ApiInterface
     {
         return $this->perPage;
     }
-
-
 
     /**
      * @param null|int $perPage
@@ -58,25 +73,25 @@ abstract class AbstractApi implements ApiInterface
      */
     protected function get($path, array $parameters = [], array $requestHeaders = [])
     {
-        $client = HttpClient::create();
-        $response = $client->request('GET', $this->url);
+        $response = $this->client->getHttpClient()->request('GET', $this->url);
         $statusCode = $response->getStatusCode();
         $contentType = $response->getHeaders()['content-type'][0];
         $content = $response->getContent();
-        $content = $response->toArray();
-        echo $content;
+        return $response->toArray();
     }
 
+    /**
+     * @param $path
+     * @param array $parameters
+     * @param array $requestHeaders
+     */
     protected function post($path, array $parameters = [], array $requestHeaders = []){
-        $client = HttpClient::create();
-        $response = $client->request('POST', $this->url);
+        $response = $this->client->getHttpClient()->request('POST', $this->url);
         $statusCode = $response->getStatusCode();
         $contentType = $response->getHeaders()['content-type'][0];
         $content = $response->getContent();
-        $content = $response->toArray();
-        echo $content;
+        return $response->toArray();
     }
-
 
 
 }

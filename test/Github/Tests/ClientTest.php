@@ -1,19 +1,17 @@
-<?php
-
-namespace Github\Tests;
+<?php namespace Github\Tests;
 
 use Github\Client;
+
 
 class ClientTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
      */
-    public function shouldNotHaveToPassHttpClientToConstructor()
+    public function testClientShouldNotBeNull()
     {
         $client = new Client();
-
-        $this->assertInstanceOf(\Http\Client\HttpClient::class, $client->getHttpClient());
+        $this->assertNotNull($client);
     }
 
 }

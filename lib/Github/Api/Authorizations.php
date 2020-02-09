@@ -8,7 +8,6 @@ namespace Github\Api;
  *
  * @link   http://developer.github.com/v3/oauth_authorizations/
  *
- * @author Evgeniy Guseletov <d46k16@gmail.com>
  */
 class Authorizations extends AbstractApi
 {
