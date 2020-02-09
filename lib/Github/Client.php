@@ -12,7 +12,8 @@ class Client
 {
     protected $type = "";
 
-    public function __construct($type = "Symfony"){
+    public function __construct($type = "Symfony")
+    {
         $this->setType($type);
     }
 
@@ -22,8 +23,9 @@ class Client
     public function getHttpClient()
     {
 
-        switch ($this->getType()){
-            default: return \Symfony\Component\HttpClient\HttpClient::create();
+        switch ($this->getType()) {
+            default:
+                return \Symfony\Component\HttpClient\HttpClient::create();
         }
 
     }

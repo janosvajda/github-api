@@ -16,7 +16,11 @@ use Github\Client;
 abstract class AbstractApi implements ApiInterface
 {
 
+    /**
+     * @var string
+     */
     private $url = "https://api.github.com";
+
 
     /**
      * The client.
@@ -39,7 +43,7 @@ abstract class AbstractApi implements ApiInterface
      */
     public function setPage($page)
     {
-        $this->page = (null === $page ? $page : (int) $page);
+        $this->page = (null === $page ? $page : (int)$page);
 
         return $this;
     }
@@ -57,7 +61,7 @@ abstract class AbstractApi implements ApiInterface
      */
     public function setPerPage($perPage)
     {
-        $this->perPage = (null === $perPage ? $perPage : (int) $perPage);
+        $this->perPage = (null === $perPage ? $perPage : (int)$perPage);
 
         return $this;
     }
@@ -65,9 +69,9 @@ abstract class AbstractApi implements ApiInterface
     /**
      * Send a GET request with query parameters.
      *
-     * @param string $path           Request path.
-     * @param array  $parameters     GET parameters.
-     * @param array  $requestHeaders Request Headers.
+     * @param string $path Request path.
+     * @param array $parameters GET parameters.
+     * @param array $requestHeaders Request Headers.
      *
      * @return array|string
      */
@@ -85,7 +89,8 @@ abstract class AbstractApi implements ApiInterface
      * @param array $parameters
      * @param array $requestHeaders
      */
-    protected function post($path, array $parameters = [], array $requestHeaders = []){
+    protected function post($path, array $parameters = [], array $requestHeaders = [])
+    {
         $response = $this->client->getHttpClient()->request('POST', $this->url);
         $statusCode = $response->getStatusCode();
         $contentType = $response->getHeaders()['content-type'][0];

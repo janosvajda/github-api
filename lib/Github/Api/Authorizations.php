@@ -30,14 +30,14 @@ class Authorizations extends AbstractApi
      */
     public function show($clientId)
     {
-        return $this->get('/authorizations/'.rawurlencode($clientId));
+        return $this->get('/authorizations/' . rawurlencode($clientId));
     }
 
     /**
      * Create an authorization.
      *
      * @param array $params
-     * @param null  $OTPCode
+     * @param null $OTPCode
      *
      * @return array
      */
